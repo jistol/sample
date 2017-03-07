@@ -38,7 +38,7 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
 
 
 
-    @Configuration
+    @Configuration     
     public class RemoteConfiguration implements BeanPostProcessor
     {
         ......
