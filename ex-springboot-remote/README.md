@@ -38,33 +38,31 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
 
 
 
-    @Configuration     
-    public class RemoteConfiguration implements BeanPostProcessor
-    {
-        ......
+        @Configuration     
+        public class RemoteConfiguration implements BeanPostProcessor
+        {     
+            @Bean
+            public RmiServiceExporter regRmiService()
+            {
+                RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+                rmiServiceExporter.setServiceName("DefaultServiceRmiRemoteBean");
+                rmiServiceExporter.setService(new DefaultServiceImpl());
+                rmiServiceExporter.setServiceInterface(DefaultService.class);
+                rmiServiceExporter.setRegistryPort(1099);
 
-        @Bean
-        public RmiServiceExporter regRmiService()
-        {
-            RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
-            rmiServiceExporter.setServiceName("DefaultServiceRmiRemoteBean");
-            rmiServiceExporter.setService(new DefaultServiceImpl());
-            rmiServiceExporter.setServiceInterface(DefaultService.class);
-            rmiServiceExporter.setRegistryPort(1099);
+                return rmiServiceExporter;
+            }
 
-            return rmiServiceExporter;
+            @Bean("/DefaultServiceHttpRemoteBean")
+            public HttpInvokerServiceExporter regHttpService()
+            {
+                HttpInvokerServiceExporter httpInvokerServiceExporter = new HttpInvokerServiceExporter();
+                httpInvokerServiceExporter.setServiceInterface(DefaultService.class);
+                httpInvokerServiceExporter.setService(new DefaultServiceImpl());
+                httpInvokerServiceExporter.afterPropertiesSet();
+                return httpInvokerServiceExporter;
+            }
         }
-
-        @Bean("/DefaultServiceHttpRemoteBean")
-        public HttpInvokerServiceExporter regHttpService()
-        {
-            HttpInvokerServiceExporter httpInvokerServiceExporter = new HttpInvokerServiceExporter();
-            httpInvokerServiceExporter.setServiceInterface(DefaultService.class);
-            httpInvokerServiceExporter.setService(new DefaultServiceImpl());
-            httpInvokerServiceExporter.afterPropertiesSet();
-            return httpInvokerServiceExporter;
-        }
-    }
 
 
 
