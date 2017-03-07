@@ -31,11 +31,10 @@ Bean등록방식은 `@Bean`어노테이션을 사용하는 방법과 `@Service`�
 ----
 RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름과 컨테이너의 포트정보를 그대로 사용합니다.
 
-아래 예제의 경우 다음과 같은 주소로 lookup됩니다.
-
 - RMI : rmi://127.0.0.1:1099/DefaultServiceRmiRemoteBean
-- HTTP : http://127.0.0.1:{server.port}/DefaultServiceHttpRemoteBean    
+- HTTP : http://127.0.0.1:{server.port}/DefaultServiceHttpRemoteBean   
 
+아래 예제의 경우 위와 같은 주소로 lookup됩니다.
 
 
     @Configuration     
