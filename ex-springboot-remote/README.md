@@ -9,7 +9,7 @@ Bean등록방식은 `@Bean`어노테이션을 사용하는 방법과 `@Service`�
 
 실제 서비스할 객체는 `DefaultService`인터페이스와 , `DefaultServiceImpl`구현 객체로 아래와 같습니다.
 
-    {% highlight java %}
+
     public interface DefaultService
     {
          String say(String prefix);
@@ -23,7 +23,7 @@ Bean등록방식은 `@Bean`어노테이션을 사용하는 방법과 `@Service`�
             return "Hello " + prefix;
         }
     }
-    {% endhighlight %}
+
 
 
 
@@ -37,7 +37,7 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
 - HTTP : http://127.0.0.1:{server.port}/DefaultServiceHttpRemoteBean    
 
 
-    {% highlight java %}
+
     @Configuration
     public class RemoteConfiguration implements BeanPostProcessor
     {
@@ -65,7 +65,7 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
             return httpInvokerServiceExporter;
         }
     }
-    {% endhighlight %}
+
 
 
 커스터마이징 어노테이션 사용방식
@@ -73,7 +73,7 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
 아래와 같이 Remoting 객체를 표시할 어노테이션을 생성합니다.
 
 
-    {% highlight java %}
+
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ ElementType.TYPE })
     public @interface RemoteType
@@ -85,13 +85,13 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
         @Required
         Class<?> serviceInterface();
     }
-    {% endhighlight %}
+
 
 
 통신 프로토콜및 ServiceExporter를 구현하는 enum객체를 만듭니다.
 
 
-    {% highlight java %}
+
     public enum Protocol
     {
     HTTP {
@@ -130,12 +130,12 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
 
     abstract public Object getServiceExporter(Object bean, String beanName, RemoteType remoteType);
     }
-    {% endhighlight %}
+
 
 
 그 다음 `@RemoteType`어노테이션으로 다음과 같이 Service객체를 정의합니다.
 
-    {% highlight java %}
+
     @Service("/DefaultServiceHttpRemote")
     @RemoteType(protocol = Protocol.HTTP, serviceInterface = DefaultService.class)
     public class DefaultServiceHttpRemoteImpl extends DefaultServiceImpl {}
@@ -143,13 +143,13 @@ RMI의 경우 ServiceName과 Port정보를 직접등록하나 HTTP는 Bean이름
     @Service("DefaultServiceRmiRemote")
     @RemoteType(protocol = Protocol.RMI, serviceInterface = DefaultService.class)
     public class DefaultServiceRmiRemoteImpl extends DefaultServiceImpl
-    {% endhighlight %}
+
 
 서비스하는 객체인 `DefaultServiceImpl`이나 `DefaultService`인터페이스에 정의하지 않고 상속받은 객체를 만드는 이유는 SpringBoot에서 해당 서비스를 직접 사용할 수 있도록 하기 위함입니다.
 
 Bean생성시 `BeanPostProcessor`를 이용하여 위 두 Remoting객체를 ServiceExporter객체로 변경해줍니다.    
 
-    {% highlight java %}
+
     @Configuration
     public class RemoteConfiguration implements BeanPostProcessor
     {
@@ -164,7 +164,7 @@ Bean생성시 `BeanPostProcessor`를 이용하여 위 두 Remoting객체를 Serv
 
         ......
     }
-    {% endhighlight %}
+
 
 그 외 구현사항
 ----
