@@ -11,7 +11,7 @@ SpringData REST의 주요 기능은 Data Repository로부터 Resource를 추출�
 ----
 [Spring Initializr](http://start.spring.io/)페이지에서 아래와 같이 Dependency를 선택하고 "Generate Project"를 눌러 zip으로 다운 받습니다.  
 
-![project configuration](/assets/img/java/spring-data-rest-introduce-and-sample/1.png)    
+![project configuration](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/1.png)    
 
 압축을 풀어 프로젝트의 pom.xml파일을 보면 아래와 같이 Dependency가 포함되 있는 것을 확인 할 수 있습니다.    
 
@@ -120,32 +120,32 @@ SpringData REST Documentation 사이트에는 `CrudRepository`를 상속하도�
     mvn clean package spring-boot:run
     {% endhighlight %}
 
-![project run](/assets/img/java/spring-data-rest-introduce-and-sample/2.png)      
+![project run](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/2.png)      
 
 실행 로그를 보면 `/api`로 시작하는 Mapping정보들이 만들어지는것을 볼 수 있습니다.
 HAL Browser를 통해 실제 Request를 날려봅시다. 아래 URL로 접속합니다.
 
     http://localhost:8080/api
 
-![HAL Browser](/assets/img/java/spring-data-rest-introduce-and-sample/3.png)      
+![HAL Browser](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/3.png)      
 
 Explorer에서 직접 주소를 쳐서 호출할 수도 있고 아래 Links를 통해 호출 할 수도 있습니다.   
 Links항목중 Carts의 get버튼을 클릭해보면 현재 Cart목록이 나옵니다.
 
-![Cart Empty List](/assets/img/java/spring-data-rest-introduce-and-sample/4.png)     
+![Cart Empty List](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/4.png)     
 
 현재는 값이 비어 있는데 Cart값을 하나 넣어보겠습니다. Carts의 non-get버튼을 부르면 Create/Update할 수 있는 화면이 뜹니다.   
 
-![Cart Insert](/assets/img/java/spring-data-rest-introduce-and-sample/5.png)     
+![Cart Insert](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/5.png)     
 
 다시 Cart목록을 호출해보면 아래와 같이 입력한 Cart가 조회됩니다.
 
-![Cart Non-Empty List](/assets/img/java/spring-data-rest-introduce-and-sample/6.png)     
+![Cart Non-Empty List](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/6.png)     
 
 `/api/{repository}/{id}`형태로 단일 목록도 조회 가능합니다.   
 아래는 Cart의 1번 목록을 조회한 결과 입니다.
 
-![Cart 1](/assets/img/java/spring-data-rest-introduce-and-sample/7.png)     
+![Cart 1](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/7.png)     
 
 그 외의 CRUD 항목도 자동으로 생성하여 제공합니다.    
 
