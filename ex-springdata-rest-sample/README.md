@@ -15,7 +15,7 @@ SpringData REST의 주요 기능은 Data Repository로부터 Resource를 추출�
 
 압축을 풀어 프로젝트의 pom.xml파일을 보면 아래와 같이 Dependency가 포함되 있는 것을 확인 할 수 있습니다.    
 
-    {% highlight xml %}
+```xml
     <dependencies>
   		<dependency>
   			<groupId>org.springframework.boot</groupId>
@@ -41,13 +41,13 @@ SpringData REST의 주요 기능은 Data Repository로부터 Resource를 추출�
   			<scope>test</scope>
   		</dependency>
   	</dependencies>
-    {% endhighlight %}
+```
 
 SpringData REST 자체가 어떤 DB를 쓸 지에 대한 설정을 포함하고 있지 않기 때문에 따로 H2 DB를 사용하도록 추가해주었으며 구축된 REST를 쉽게 테스트 해보기 위해 HAL Browser를 추가하였습니다.    
 
 먼저 `application.properties`를 설정합니다.     
 
-    {% highlight properties %}
+```text
     # SpringData REST의 기본 context path
     spring.data.rest.basePath=api
 
@@ -103,22 +103,22 @@ Entity는 장바구니(Cart)클래스와 물건(Item)클래스를 만들도록 �
 
         ....
     }
-    {% endhighlight %}
+```
 
 그리고 각 Entity의 Repository 인터페이스를 생성합니다.    
 SpringData REST Documentation 사이트에는 `CrudRepository`를 상속하도록 예제가 나오지만 `JpaRepository`를 이용해도 무방합니다.    
 
-    {% highlight java %}
+```java
     public interface CartRepository extends JpaRepository<Cart, Integer> {}    
 
     public interface ItemRepository extends JpaRepository<Item, Integer> {}
-    {% endhighlight %}
+```
 
 코딩 할 작업은 모두 끝났습니다. 이제 돌려봅시다.    
 
-    {% highlight cmd %}
+```text
     mvn clean package spring-boot:run
-    {% endhighlight %}
+```
 
 ![project run](https://jistol.github.io/assets/img/java/spring-data-rest-introduce-and-sample/2.png)      
 
@@ -155,14 +155,14 @@ SpringData REST에서 설정 방식은 3가지가 있습니다. 단, Framework�
 
 1. application.properties(xml,yaml...)에 설정하기      
 
-    {% highlight properties %}
-    spring.data.rest.basePath=/api    
+```yaml
+    spring.data.rest.base-path=/api    
     spring.data.rest.defaultPageSize=10     
-    {% endhighlight %}
+```
 
 2. @Configuration 사용하기     
 
-    {% highlight java %}
+```java
     @Configuration
     class CustomRestMvcConfiguration {
 
@@ -178,11 +178,11 @@ SpringData REST에서 설정 방식은 3가지가 있습니다. 단, Framework�
         };
       }
     }
-    {% endhighlight %}
+```
 
 3. RepositoryRestConfigurerAdapter를 상속받기    
 
-    {% highlight java %}
+```java
     @Component
     public class CustomizedRestMvcConfiguration extends RepositoryRestConfigurerAdapter {
 
@@ -191,7 +191,7 @@ SpringData REST에서 설정 방식은 3가지가 있습니다. 단, Framework�
         config.setBasePath("/api");
       }
     }
-    {% endhighlight %}
+```
 
 설정 항목은 아래 표를 참고하세요.
 
