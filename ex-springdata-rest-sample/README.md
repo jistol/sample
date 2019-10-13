@@ -63,12 +63,12 @@ SpringData REST 자체가 어떤 DB를 쓸 지에 대한 설정을 포함하고 
 
     spring.h2.console.enabled=true
     spring.h2.console.path=/console
-    {% endhighlight %}
+```
 
 
 Entity는 장바구니(Cart)클래스와 물건(Item)클래스를 만들도록 하겠습니다.      
 
-    {% highlight java %}
+```java
     @Entity
     public class Cart
     {
